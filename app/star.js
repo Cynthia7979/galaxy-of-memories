@@ -7,7 +7,7 @@ export default function Star(props) {
       {...props}
       ref={ref}
     >
-      <sphereGeometry />
+      <sphereGeometry parameters={{radius: 10}} />
       <meshStandardMaterial color='white' />
     </mesh>
   );
