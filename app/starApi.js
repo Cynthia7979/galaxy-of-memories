@@ -1,3 +1,5 @@
+import { Vector3 } from "three"
+
 export function addStar(stars, setStars) {
     return (name, born, death, description) => {
         setStars([
@@ -11,6 +13,16 @@ export function addStar(stars, setStars) {
                 position: randomPos()
             }
         ])
+    }
+}
+
+export function searchStar(stars, setZoom, setFocusPos, setCurrentFocus) {
+    return (nameQuery) => {
+        console.log(stars.filter(obj => obj.name == nameQuery))
+        let chosenStar = stars.filter(obj => obj.name == nameQuery)[0]
+        setCurrentFocus(chosenStar ? chosenStar.name : null);
+        setFocusPos(chosenStar ? {x: chosenStar.position[0], y: chosenStar.position[1], z: chosenStar.position[2]} : {x: 0, y: 0, z: 10})
+        setZoom(chosenStar ? true : false)
     }
 }
 

@@ -25,7 +25,7 @@ export default function Star({ label: name, born, death, description, onClick_, 
         </Html>
       ) : null}
 
-      <Blooming {...props} color={color} position={position} onClick={(e) => onClick_(e.object.position)} hover={hover} setHover={setHover}>
+      <Blooming {...props} color={color} position={position} onClick={(e) => onClick_()} hover={hover} setHover={setHover}>
         <sphereGeometry args={[radius]}/>
       </Blooming>
     </>

@@ -12,7 +12,7 @@ import { UnrealBloomPass } from 'three-stdlib'
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
 import Controls from './controls';
 import { Button } from '@nextui-org/button';
-import { addStar } from './starApi';
+import { addStar, searchStar } from './starApi';
 
 
 extend({ UnrealBloomPass, OutputPass })
@@ -53,7 +53,7 @@ export default function Home() {
       {
         stars.map(({ name, color, position, born, death, description }) => (
           <Star
-            onClick_={(focusPos) => (setZoom(!zoom), setFocusPos(focusPos), setCurrentFocus(!zoom ? name : null))}
+            onClick_={() => (setZoom(!zoom), setFocusPos({x: position[0], y: position[1], z: position[2]}), setCurrentFocus(!zoom ? name : null), console.log(focusPos))}
             isFocus={currentFocus == name}
             key={name}
             color={color}
@@ -72,6 +72,7 @@ export default function Home() {
       <NextUIProvider>
         <Menu/>
         <Button onClick={() => addStar(stars, setStars)('star3', 2000, 3000, "Hi")}>Click Me!</Button>
+        <Button onClick={() => searchStar(stars, setZoom, setFocusPos, setCurrentFocus)('star3')}>Search!</Button>
       </NextUIProvider>
       <Canvas camera={{fov: 50}}>
         <ambientLight />
