@@ -11,11 +11,14 @@ import { Effects } from '@react-three/drei'
 import { UnrealBloomPass } from 'three-stdlib'
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
 import Controls from './controls';
+import { Button } from '@nextui-org/button';
+import { addStar } from './starApi';
+
 
 extend({ UnrealBloomPass, OutputPass })
 
 export default function Home() {
-  const randomValue = (min=-3, max=3) => Math.random() * (max - min) + min
+  const randomValue = (min=-3, max=3, gap=5) => (Math.random() * (max/gap - min/gap) + min/gap) * gap
   const randomPos = () => [randomValue(), randomValue(), randomValue(-3, 1)]
 
   const { intensity, radius } = useState({
@@ -29,17 +32,21 @@ export default function Home() {
   const [stars, setStars] = useState([
     {
       name: 'star1',
+      born: 2000,
+      death: 3000,
+      description: "Lorum ipsum",
       color: '#fce6a6',
       position: randomPos()
     },
     {
       name: 'star2',
+      born: 2000,
+      death: 3000,
+      description: "Momento mori",
       color: '#fce616',
       position: randomPos()
     }
   ])
-
-  const getGlobalFocus = () => ({zoom: zoom, focus: focusPos})
 
   const StarComponents = ({ stars }) => (
     <>
@@ -55,6 +62,7 @@ export default function Home() {
     <main className={styles.main}>
       <NextUIProvider>
         <Menu/>
+        <Button onClick={() => addStar(stars, setStars)('star3', 2000, 3000, "Hi")}>Click Me!</Button>
       </NextUIProvider>
       <Canvas camera={{fov: 50}}>
         <ambientLight />
