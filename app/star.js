@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { useCursor } from "@react-three/drei";
 
-export default function Star({ setZoom, ...props}) {
+export default function Star({ label, setZoom, color="#fce6a6", position=[0, 0, 0], ...props}) {
   return (
-    <Blooming {...props} color="#fce6a6" position={[0, 0, 0]} setZoom={setZoom}>
-      <sphereGeometry />
+    <Blooming {...props} color={color} position={position} setZoom={setZoom}>
+      <sphereGeometry args={[0.5]}/>
     </Blooming>
   );
 }
