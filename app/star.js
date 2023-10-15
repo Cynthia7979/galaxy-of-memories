@@ -1,25 +1,38 @@
 import { useRef, useState } from "react";
-import { useCursor } from "@react-three/drei";
+import { Html, useCursor } from "@react-three/drei";
+import styles from "./star.module.css"
 
-export default function Star({ label, setZoom, color="#fce6a6", position=[0, 0, 0], ...props}) {
+export default function Star({ label, onClick_, isFocus, color="#fce6a6", position=[0, 0, 0], ...props}) {
+  const [hover, setHover] = useState(false)
+  useCursor(hover)
+
+  const radius = 0.5;
+
   return (
-    <Blooming {...props} color={color} position={position} setZoom={setZoom}>
-      <sphereGeometry args={[0.5]}/>
-    </Blooming>
+    <>
+      {
+        (hover || isFocus) ? (
+          <Html center position={[position[0], position[1] - 1.3 * radius, position[2]]}>
+            <div className={[styles.label, isFocus ? styles.largeLabel : null].join(' ')}>{label}</div>
+          </Html>
+        ) : null
+      }
+      <Blooming {...props} color={color} position={position} onClick={(e) => onClick_(e.object.position)} hover={hover} setHover={setHover}>
+        <sphereGeometry args={[radius]}/>
+      </Blooming>
+    </>
   );
 }
 
-function Blooming({ children, color, setZoom, ...props }) {
-  const [hovered, hover] = useState(true)
-  useCursor(!hovered)
+function Blooming({ children, color, setZoom, hover, setHover, ...props }) {
   return (
-    <mesh {...props} onClick={(e) => setZoom(e.object.position)} onPointerOver={() => hover(false)} onPointerOut={() => hover(true)}>
+    <mesh {...props} onPointerOver={() => setHover(true)} onPointerOut={() => setHover(false)}>
       {children}
       {/* Now, in order to get selective bloom we simply crank colors out of
         their natural spectrum. Where colors are normally defined between 0 - 1 we push them
         way out of range, into a higher defintion (HDR). What previously was [1, 1, 1] now could
         for instance be [10, 10, 10]. This requires that toneMapping is off, or it clamps to 1 */}
-      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={hovered ? 1 : 2} toneMapped={false} />
+      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={hover ? 2 : 1} toneMapped={false} />
     </mesh>
   )
 }

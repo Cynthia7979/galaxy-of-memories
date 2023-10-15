@@ -22,8 +22,10 @@ export default function Home() {
     intensity: { value: 0.34, min: 0, max: 1.5, step: 0.01 },
     radius: { value: 0.90, min: 0, max: 1, step: 0.01 }
   })
+  
   const [zoom, setZoom] = useState(false)
-  const [focus, setFocus] = useState({})
+  const [focusPos, setFocusPos] = useState({})
+  const [currentFocus, setCurrentFocus] = useState(null)
   const [stars, setStars] = useState([
     {
       name: 'star1',
@@ -37,11 +39,13 @@ export default function Home() {
     }
   ])
 
+  const getGlobalFocus = () => ({zoom: zoom, focus: focusPos})
+
   const StarComponents = ({ stars }) => (
     <>
       {
         stars.map(({ name, color, position }) => (
-          <Star setZoom={(focusPos) => (setZoom(!zoom), setFocus(focusPos))} key={name} color={color} label={name} position={position}/>
+          <Star onClick_={(focusPos) => (setZoom(!zoom), setFocusPos(focusPos), setCurrentFocus(!zoom ? name : null))} isFocus={currentFocus == name} key={name} color={color} label={name} position={position}/>
         ))
       }
     </>
@@ -60,11 +64,10 @@ export default function Home() {
           <unrealBloomPass threshold={0} strength={0.34} radius={0.90} />
           <outputPass args={[THREE.ACESFilmicToneMapping]} />
         </Effects>
-        <Controls zoom={zoom} focus={focus} />
+        <Controls zoom={zoom} focus={focusPos} />
 
         <StarComponents stars={stars} />
       </Canvas>
     </main>
   )
 }
-

@@ -1,0 +1,9 @@
+.label {
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.largeLabel {
+    font-size: 36px;
+}
