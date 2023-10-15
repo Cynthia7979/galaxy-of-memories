@@ -36,7 +36,13 @@ export default function Home() {
       death: 3000,
       description: "Lorum ipsum",
       color: '#fce6a6',
-      position: randomPos()
+      position: randomPos(),
+      planets: [
+        {
+          label: "I was here",
+          color: "#3f3ffe"
+        }
+      ]
     },
     {
       name: 'star2',
@@ -44,7 +50,13 @@ export default function Home() {
       death: 3000,
       description: "Momento mori",
       color: '#fce616',
-      position: randomPos()
+      position: randomPos(),
+      planets: [
+        {
+          label: "I was here",
+          color: "#3f3ffe"
+        }
+      ]
     }
   ])
   const [messageModalOpen, setMessageModalOpen] = useState(false)
@@ -52,7 +64,7 @@ export default function Home() {
   const StarComponents = ({ stars }) => (
     <>
       {
-        stars.map(({ name, color, position, born, death, description }) => (
+        stars.map(({ name, color, position, born, death, description, planets }) => (
           <Star
             onClick_={() => (setZoom(!zoom), setFocusPos({x: position[0], y: position[1], z: position[2]}), setCurrentFocus(!zoom ? name : null), console.log(focusPos))}
             isFocus={currentFocus == name}
@@ -62,20 +74,24 @@ export default function Home() {
             born={born}
             death={death}
             description={description}
-            position={position}/>
+            position={position}
+            planets={planets}
+          />
         ))
       }
     </>
   )
 
-  
+  const addMessage = (msg) => {
+    
+  }
 
   return (
     <main className={styles.main}>
       <NextUIProvider className={styles.position}>
         <Menu searchCallback={searchStar(stars, setZoom, setFocusPos, setCurrentFocus)} messageCallback={() => setMessageModalOpen(true)} inZoom={zoom}/>
       </NextUIProvider>
-      <AddMessageModal visible={messageModalOpen} openModal={() => setMessageModalOpen(true)} closeModal={() => setMessageModalOpen(false)} />
+      <AddMessageModal visible={messageModalOpen} openModal={() => setMessageModalOpen(true)} closeModal={() => setMessageModalOpen(false)} addMessageCallback={addMessage}/>
       <Canvas camera={{fov: 50}}>
         <ambientLight />
 

@@ -3,12 +3,8 @@ import { Html, useCursor } from "@react-three/drei";
 import styles from "./star.module.css"
 import Planet from "./planet";
 
-export default function Star({ label: name, born, death, description, onClick_, isFocus, color="#fce6a6", position=[0, 0, 0], ...props}) {
+export default function Star({ label: name, born, death, description, onClick_, isFocus, color="#fce6a6", position=[0, 0, 0], planets, ...props}) {
   const [hover, setHover] = useState(false)
-  const [planets, setPlanets] = useState([{
-    label: "I was here",
-    color: "#3f3ffe"
-  }])
   useCursor(hover)
 
   const starRadius = 0.5;
