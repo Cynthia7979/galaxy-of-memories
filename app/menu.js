@@ -1,8 +1,15 @@
 import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Button} from "@nextui-org/react";
 import {SearchIcon} from "./search.js";
+import { useState } from "react";
+import { useRef } from "react";
 
-export default function Menu() {
+export default function Menu({ searchCallback }) {
+  const [query, setQuery] = useState("");
+  const inputRef = useRef()
+  const handleKeyUp = ev => {
+    if (ev.keyCode === 13) searchCallback(query)
+  }
   return (
     <Navbar isBordered>
       <NavbarContent justify="start">
@@ -23,6 +30,9 @@ export default function Menu() {
           size="sm"
           startContent={<SearchIcon size={18} />}
           type="search"
+          ref={inputRef}
+          onKeyUp={handleKeyUp}
+          onChange={e => setQuery(e.currentTarget.value)}
         />
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
