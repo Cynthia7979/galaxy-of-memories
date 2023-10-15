@@ -70,7 +70,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <NextUIProvider>
+      <NextUIProvider className={styles.position}>
         <Menu/>
         <Button onClick={() => addStar(stars, setStars)('star3', 2000, 3000, "Hi")}>Click Me!</Button>
         <Button onClick={() => searchStar(stars, setZoom, setFocusPos, setCurrentFocus)('star3')}>Search!</Button>
