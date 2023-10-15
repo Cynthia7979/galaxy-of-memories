@@ -27,8 +27,8 @@ export function searchStar(stars, setZoom, setFocusPos, setCurrentFocus, showMes
     }
 }
 
-export function addPlanet(stars, setStars, currentFocus, resetValues=()=>{}) {
-    return (planetMessage) => {
+export function addPlanet(stars, setStars, currentFocus) {
+    return (planetMessage, resetValues=()=>{}) => {
         let starsCopy = stars.map( star => {
             let starCopy = star;
             if (starCopy.name === currentFocus) {
