@@ -16,7 +16,6 @@ export default function Menu({ inZoom, searchCallback, messageCallback, addStarC
     <Navbar className={styles.bar}>
       <NavbarContent >
         <NavbarBrand >
-          <p className={styles.title}>Galaxy of Memories</p>
         </NavbarBrand>
       </NavbarContent>
 

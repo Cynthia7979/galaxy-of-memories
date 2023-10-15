@@ -20,7 +20,7 @@ extend({ UnrealBloomPass, OutputPass })
 
 export default function Home() {
   const randomValue = (min=-3, max=3, gap=5) => (Math.random() * (max/gap - min/gap) + min/gap) * gap
-  const randomPos = () => [randomValue(), randomValue(), randomValue(-3, 1)]
+  const randomPos = () => [randomValue(), randomValue(), randomValue(-10, 5)]
 
   const { intensity, radius } = useState({
     intensity: { value: 0.34, min: 0, max: 1.5, step: 0.01 },
@@ -32,7 +32,7 @@ export default function Home() {
   const [currentFocus, setCurrentFocus] = useState(null)
   const [stars, setStars] = useState([
     {
-      name: 'star1',
+      name: 'Bob Robert',
       born: 2000,
       death: 3000,
       description: "Lorum ipsum",
@@ -46,7 +46,7 @@ export default function Home() {
       ]
     },
     {
-      name: 'star2',
+      name: 'A. Name',
       born: 2000,
       death: 3000,
       description: "Momento mori",

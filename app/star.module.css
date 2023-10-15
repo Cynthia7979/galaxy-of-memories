@@ -2,6 +2,7 @@
     color: white;
     font-weight: bold;
     background-color: transparent;
+    text-wrap: nowrap;
 }
 
 .largeLabel {
