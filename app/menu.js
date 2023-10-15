@@ -3,8 +3,15 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownIte
 import {SearchIcon} from "./search.js";
 import styles from './menu.module.css'
 import { symbol } from "prop-types";
+import { useState } from "react";
+import { useRef } from "react";
 
-export default function Menu() {
+export default function Menu({ searchCallback }) {
+  const [query, setQuery] = useState("");
+  const inputRef = useRef()
+  const handleKeyUp = ev => {
+    if (ev.keyCode === 13) searchCallback(query)
+  }
   return (
     <Navbar className={styles.bar}>
       <NavbarContent >
