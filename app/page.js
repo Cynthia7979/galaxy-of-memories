@@ -11,7 +11,6 @@ import { Effects } from '@react-three/drei'
 import { UnrealBloomPass } from 'three-stdlib'
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
 import Controls from './controls';
-import { Button } from '@nextui-org/button';
 import { addStar, searchStar } from './starApi';
 import SkyBox from './skybox'
 
@@ -72,8 +71,6 @@ export default function Home() {
     <main className={styles.main}>
       <NextUIProvider className={styles.position}>
         <Menu searchCallback={searchStar(stars, setZoom, setFocusPos, setCurrentFocus)}/>
-        <Button onClick={() => addStar(stars, setStars)('star3', 2000, 3000, "Hi")}>Click Me!</Button>
-        <Button onClick={() => searchStar(stars, setZoom, setFocusPos, setCurrentFocus)('star3')}>Search!</Button>
       </NextUIProvider>
       <Canvas camera={{fov: 50}}>
         <ambientLight />
