@@ -13,7 +13,7 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
 import Controls from './controls';
 import { addStar, searchStar, addPlanet } from './starApi';
 import SkyBox from './skybox'
-import { AddMessageModal } from './modals';
+import { AddMessageModal, AddStarModal } from './modals';
 
 extend({ UnrealBloomPass, OutputPass })
 
@@ -60,6 +60,7 @@ export default function Home() {
     }
   ])
   const [messageModalOpen, setMessageModalOpen] = useState(false)
+  const [starModalOpen, setStarModalOpen] = useState(false)
 
   const StarComponents = ({ stars }) => (
     <>
@@ -85,9 +86,22 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <NextUIProvider className={styles.position}>
-        <Menu searchCallback={searchStar(stars, setZoom, setFocusPos, setCurrentFocus)} messageCallback={() => setMessageModalOpen(true)} inZoom={zoom}/>
+        <Menu
+          searchCallback={searchStar(stars, setZoom, setFocusPos, setCurrentFocus)}
+          messageCallback={() => setMessageModalOpen(true)}
+          addStarCallback={() => setStarModalOpen(true)}
+          inZoom={zoom}/>
       </NextUIProvider>
-      <AddMessageModal visible={messageModalOpen} openModal={() => setMessageModalOpen(true)} closeModal={() => setMessageModalOpen(false)} addMessageCallback={addPlanet(stars, setStars, currentFocus)}/>
+      <AddMessageModal
+        visible={messageModalOpen}
+        closeModal={() => setMessageModalOpen(false)}
+        addMessageCallback={addPlanet(stars, setStars, currentFocus)}
+      />
+      <AddStarModal
+        visible={starModalOpen}
+        closeModal={() => setStarModalOpen(false)}
+        addStarCallback={addStar(stars, setStars)}
+      />
       <Canvas camera={{fov: 50}}>
         <ambientLight />
 

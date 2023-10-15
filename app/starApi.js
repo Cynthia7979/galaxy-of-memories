@@ -1,5 +1,5 @@
 export function addStar(stars, setStars) {
-    return (name, born, death, description) => {
+    return (name, born, death, description, resetValues=()=>{}) => {
         setStars([
             ...stars,
             {
@@ -8,9 +8,11 @@ export function addStar(stars, setStars) {
                 death: death,
                 description: description,
                 color: randomStarColor(),
-                position: randomPos()
+                position: randomPos(),
+                planets: []
             }
-        ])
+        ]);
+        resetValues();
     }
 }
 
@@ -24,7 +26,7 @@ export function searchStar(stars, setZoom, setFocusPos, setCurrentFocus) {
     }
 }
 
-export function addPlanet(stars, setStars, currentFocus) {
+export function addPlanet(stars, setStars, currentFocus, resetValues=()=>{}) {
     return (planetMessage) => {
         let starsCopy = stars.map( star => {
             let starCopy = star;
@@ -36,7 +38,8 @@ export function addPlanet(stars, setStars, currentFocus) {
             }
             return starCopy
         })
-        setStars(starsCopy)
+        setStars(starsCopy);
+        resetValues();
     }
 }
 

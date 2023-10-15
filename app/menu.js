@@ -6,7 +6,7 @@ import { symbol } from "prop-types";
 import { useState } from "react";
 import { useRef } from "react";
 
-export default function Menu({ inZoom, searchCallback, messageCallback }) {
+export default function Menu({ inZoom, searchCallback, messageCallback, addStarCallback }) {
   const [query, setQuery] = useState("");
   const inputRef = useRef()
   const handleKeyUp = ev => {
@@ -44,7 +44,7 @@ export default function Menu({ inZoom, searchCallback, messageCallback }) {
           </DropdownTrigger>
           <DropdownMenu>
             <DropdownItem>
-              <Button className={styles.text2}>
+              <Button className={styles.text2} onClick={addStarCallback}>
                 Add a new Star
               </Button>
             </DropdownItem>
