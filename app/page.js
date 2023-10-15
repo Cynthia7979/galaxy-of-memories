@@ -51,8 +51,17 @@ export default function Home() {
   const StarComponents = ({ stars }) => (
     <>
       {
-        stars.map(({ name, color, position }) => (
-          <Star onClick_={(focusPos) => (setZoom(!zoom), setFocusPos(focusPos), setCurrentFocus(!zoom ? name : null))} isFocus={currentFocus == name} key={name} color={color} label={name} position={position}/>
+        stars.map(({ name, color, position, born, death, description }) => (
+          <Star
+            onClick_={(focusPos) => (setZoom(!zoom), setFocusPos(focusPos), setCurrentFocus(!zoom ? name : null))}
+            isFocus={currentFocus == name}
+            key={name}
+            color={color}
+            label={name}
+            born={born}
+            death={death}
+            description={description}
+            position={position}/>
         ))
       }
     </>

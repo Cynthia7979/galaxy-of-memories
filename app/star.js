@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Html, useCursor } from "@react-three/drei";
 import styles from "./star.module.css"
 
-export default function Star({ label, onClick_, isFocus, color="#fce6a6", position=[0, 0, 0], ...props}) {
+export default function Star({ label: name, born, death, description, onClick_, isFocus, color="#fce6a6", position=[0, 0, 0], ...props}) {
   const [hover, setHover] = useState(false)
   useCursor(hover)
 
@@ -10,13 +10,21 @@ export default function Star({ label, onClick_, isFocus, color="#fce6a6", positi
 
   return (
     <>
-      {
-        (hover || isFocus) ? (
-          <Html center position={[position[0], position[1] - 1.3 * radius, position[2]]}>
-            <div className={[styles.label, isFocus ? styles.largeLabel : null].join(' ')}>{label}</div>
-          </Html>
-        ) : null
-      }
+      {(hover || isFocus) ? (
+        <Html center position={[position[0], position[1] - 1.3 * radius, position[2]]}>
+            <div className={[styles.label, isFocus ? styles.largeLabel : null].join(' ')}>{name}</div>
+        </Html>
+      ) : null}
+        
+      {isFocus ? (
+        <Html position={[position[0] + 1.3 * radius, position[1] + radius, position[2]]}>
+          <div className={styles.detailsContainer}>
+            <h1 className={styles.name}>{name} <span className={styles.life}>({born}-{death})</span></h1>
+            <p className={styles.description}>{description}</p>
+          </div>
+        </Html>
+      ) : null}
+
       <Blooming {...props} color={color} position={position} onClick={(e) => onClick_(e.object.position)} hover={hover} setHover={setHover}>
         <sphereGeometry args={[radius]}/>
       </Blooming>
