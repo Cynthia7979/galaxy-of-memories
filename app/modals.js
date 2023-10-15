@@ -22,8 +22,13 @@ export function Modal({ children, visible, modalHeader, modalFooter, ...props}) 
 export function AddMessageModal ({ addMessageCallback, closeModal, ...props }) {
     return (
         <Modal
-            modalHeader={<>Impart a Message</>}
-            modalFooter={<Button onClick={closeModal}>Close</Button>}
+            modalHeader={"Impart a Message"}
+            modalFooter={(
+                <>
+                    <Button onClick={() => addMessageCallback("TestMessage")}>Submit</Button>
+                    <Button onClick={closeModal}>Close</Button>
+                </>
+            )}
             {...props}
         >
             {"Hello :)"}

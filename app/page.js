@@ -11,7 +11,7 @@ import { Effects } from '@react-three/drei'
 import { UnrealBloomPass } from 'three-stdlib'
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
 import Controls from './controls';
-import { addStar, searchStar } from './starApi';
+import { addStar, searchStar, addPlanet } from './starApi';
 import SkyBox from './skybox'
 import { AddMessageModal } from './modals';
 
@@ -82,16 +82,12 @@ export default function Home() {
     </>
   )
 
-  const addMessage = (msg) => {
-    
-  }
-
   return (
     <main className={styles.main}>
       <NextUIProvider className={styles.position}>
         <Menu searchCallback={searchStar(stars, setZoom, setFocusPos, setCurrentFocus)} messageCallback={() => setMessageModalOpen(true)} inZoom={zoom}/>
       </NextUIProvider>
-      <AddMessageModal visible={messageModalOpen} openModal={() => setMessageModalOpen(true)} closeModal={() => setMessageModalOpen(false)} addMessageCallback={addMessage}/>
+      <AddMessageModal visible={messageModalOpen} openModal={() => setMessageModalOpen(true)} closeModal={() => setMessageModalOpen(false)} addMessageCallback={addPlanet(stars, setStars, currentFocus)}/>
       <Canvas camera={{fov: 50}}>
         <ambientLight />
 

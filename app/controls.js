@@ -10,7 +10,7 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
     const gl = useThree((state) => state.gl)
     const controls = useMemo(() => new CameraControls(camera, gl.domElement), [])
     return useFrame((state, delta) => {
-        zoom ? pos.set(focus.x, focus.y, focus.z + 2.2) : pos.set(0, 0, 10)
+        zoom ? pos.set(focus.x, focus.y, focus.z + 3.2) : pos.set(0, 0, 10)
         zoom ? look.set(focus.x, focus.y, focus.z - 0.2) : look.set(0, 0, 0)
 
         state.camera.position.lerp(pos, 0.5)

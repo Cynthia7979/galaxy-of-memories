@@ -7,7 +7,7 @@ export function addStar(stars, setStars) {
                 born: born,
                 death: death,
                 description: description,
-                color: randomColor(),
+                color: randomStarColor(),
                 position: randomPos()
             }
         ])
@@ -24,11 +24,29 @@ export function searchStar(stars, setZoom, setFocusPos, setCurrentFocus) {
     }
 }
 
-const randomColor = (redMin=0xF0, redMax=0xFF, greenMin=0xE0, greenMax=0xF0, blueMin=0x86, blueMax=0xFF) => {
+export function addPlanet(stars, setStars, currentFocus) {
+    return (planetMessage) => {
+        let starsCopy = stars.map( star => {
+            let starCopy = star;
+            if (starCopy.name === currentFocus) {
+                starCopy.planets.push({
+                    label: planetMessage,
+                    color: randomPlanetColor()
+                })
+            }
+            return starCopy
+        })
+        setStars(starsCopy)
+    }
+}
+
+const randomColor = (redMin, redMax, greenMin, greenMax, blueMin, blueMax) => {
     const red = ((Math.random() * (redMax - redMin) + redMin) << 0).toString(16).padStart(2, '0');
     const green = ((Math.random() * (greenMax - greenMin) + greenMin) << 0).toString(16).padStart(2, '0')
     const blue = ((Math.random() * (blueMax - blueMin) + blueMin) << 0).toString(16).padStart(2, '0')
     return '#' + red + green + blue
 }
+const randomStarColor = () => randomColor(0xF0, 0xFF, 0xE0, 0xF0, 0x86, 0xFF)
+const randomPlanetColor = () => randomColor(0x70, 0xCF, 0x30, 0xCF, 0x86, 0xFF)
 const randomValue = (min=-3, max=3, gap=5) => (Math.random() * (max/gap - min/gap) + min/gap) * gap
 const randomPos = () => [randomValue(), randomValue(), randomValue(-3, 1)]

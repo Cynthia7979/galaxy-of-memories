@@ -12,7 +12,7 @@ export default function Planet({ color, label, index, centerPos }) {
     const [hovered, setHovered] = useState(false)
     const [tOffset, setTOffset] = useState(0)
     const [savedT, setSavedT] = useState(0)
-    const orbitRadius = 0.8 * (index + 1) + 0.5;
+    const orbitRadius = 0.3 * (index + 1) + 1;
     const planetPosition = [orbitRadius + centerPos[0], centerPos[1], centerPos[2]]
     const planetRadius = 0.1
     useCursor(hovered, 'help')
@@ -24,7 +24,7 @@ export default function Planet({ color, label, index, centerPos }) {
         } else if (savedT) {
             setSavedT(0)
         }
-        const t = (clock.getElapsedTime() - tOffset) * orbitRadius;
+        const t = (clock.getElapsedTime() - tOffset) * (1.6 / orbitRadius);  // Slower the further away
         const newPos = circularMotionAt(t, orbitRadius, centerPos)
         planetRef.current.position.x = hovered ? planetRef.current.position.x : newPos.x
         planetRef.current.position.y = hovered ? planetRef.current.position.y : newPos.y
