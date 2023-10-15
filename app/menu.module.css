@@ -1,0 +1,35 @@
+.title {
+    position: absolute;
+    text-align: center;
+    width: 100vw;
+    padding: 3vb;
+    color: white;
+    font-size: 30px;
+}
+
+.search {
+    position: absolute;
+    text-align: right;
+    width: 100vw;
+    padding: 4vb;
+    padding-right: 10vb;
+}
+
+.text {
+    color: gray;
+}
+.text2 {
+    color: gray;    
+    background: none;
+}
+.icon {
+    padding-right: 1vb;
+}
+
+.bar {
+    width: 100vw;
+
+    box-shadow: 0 30px 20px rgba(0,0,0,1);
+    background-color: black;
+    opacity: 0.7;
+}
