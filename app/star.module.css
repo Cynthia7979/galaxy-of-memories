@@ -1,0 +1,20 @@
+.label {
+    color: white;
+    font-weight: bold;
+    background-color: transparent;
+}
+
+.largeLabel {
+    font-size: 36px;
+}
+
+.detailsContainer {
+    background-color: #2e2e2e;
+    border: white dashed 2px;
+    padding: 14px;
+    font-size: 12px;
+    min-width: 400px;
+    .name {
+        font-size: 16px;
+    }
+}
