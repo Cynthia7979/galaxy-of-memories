@@ -6,9 +6,6 @@ import { Canvas, extend, camera, useThree } from "@react-three/fiber";
 import Star from './star.js';
 import Menu from './menu';
 import {NextUIProvider} from "@nextui-org/system";
-import { Button } from "@nextui-org/react";
-import AddStar from './api/addStar'
-
 import * as THREE from 'three'
 import { Effects } from '@react-three/drei'
 import { UnrealBloomPass } from 'three-stdlib'
@@ -34,18 +31,9 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-    <NextUIProvider>
-      <Menu/>
-    </NextUIProvider>
-    <main className={styles.main}>
-      <AddStar
-        name="GBP"
-        born={2000}
-        death={3000}
-        description={"Test Description"}
-        media={
-      />
-
+      <NextUIProvider>
+        <Menu/>
+      </NextUIProvider>
       <Canvas>
         <ambientLight />
         <pointLight position={[MousePosition.x, MousePosition.y, 1]} decay={0} intensity={3}/>
@@ -60,7 +48,6 @@ export default function Home() {
         </Shape>
       </Canvas>
     </main>
-
   )
 }
 
