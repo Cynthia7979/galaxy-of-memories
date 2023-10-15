@@ -19,7 +19,7 @@ export function searchStar(stars, setZoom, setFocusPos, setCurrentFocus) {
         console.log(stars.filter(obj => obj.name == nameQuery))
         let chosenStar = stars.filter(obj => obj.name == nameQuery)[0]
         setCurrentFocus(chosenStar ? chosenStar.name : null);
-        setFocusPos(chosenStar ? {x: chosenStar.position[0], y: chosenStar.position[1], z: chosenStar.position[2]} : {x: 0, y: 0, z: 10})
+        chosenStar ? setFocusPos({x: chosenStar.position[0], y: chosenStar.position[1], z: chosenStar.position[2]}) : 0
         setZoom(chosenStar ? true : false)
     }
 }
