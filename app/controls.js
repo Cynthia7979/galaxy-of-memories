@@ -20,3 +20,5 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
         return controls.update(delta)
     })
 }
+
+export default Controls;
