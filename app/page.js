@@ -13,6 +13,7 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
 import Controls from './controls';
 import { Button } from '@nextui-org/button';
 import { addStar, searchStar } from './starApi';
+import SkyBox from './skybox'
 
 
 extend({ UnrealBloomPass, OutputPass })
@@ -85,6 +86,7 @@ export default function Home() {
         <Controls zoom={zoom} focus={focusPos} />
 
         <StarComponents stars={stars} />
+        <SkyBox />
       </Canvas>
     </main>
   )

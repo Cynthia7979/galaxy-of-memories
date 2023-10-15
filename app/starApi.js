@@ -1,5 +1,3 @@
-import { Vector3 } from "three"
-
 export function addStar(stars, setStars) {
     return (name, born, death, description) => {
         setStars([
