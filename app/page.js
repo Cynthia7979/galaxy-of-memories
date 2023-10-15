@@ -6,6 +6,8 @@ import { Canvas, extend, camera, useThree } from "@react-three/fiber";
 import Star from './star.js';
 import Menu from './menu';
 import {NextUIProvider} from "@nextui-org/system";
+import { Button } from "@nextui-org/react";
+import AddStar from './api/addStar'
 
 import * as THREE from 'three'
 import { Effects } from '@react-three/drei'
@@ -35,6 +37,15 @@ export default function Home() {
     <NextUIProvider>
       <Menu/>
     </NextUIProvider>
+    <main className={styles.main}>
+      <AddStar
+        name="GBP"
+        born={2000}
+        death={3000}
+        description={"Test Description"}
+        media={
+      />
+
       <Canvas>
         <ambientLight />
         <pointLight position={[MousePosition.x, MousePosition.y, 1]} decay={0} intensity={3}/>
@@ -47,7 +58,6 @@ export default function Home() {
         <Shape color="#fce6a6" position={[0, 0, 0]}>
           <circleGeometry args={[0.8, 64]} />
         </Shape>
-
       </Canvas>
     </main>
 
@@ -66,36 +76,4 @@ function Shape({ children, color, ...props }) {
       <meshStandardMaterial color={color} emissive={color} emissiveIntensity={hovered ? 1 : 2} toneMapped={false} />
     </mesh>
   )
-}
-
-function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-
-  useEffect(() => {
-    // only execute all the code below in client side
-    // Handler to call on window resize
-    function handleResize() {
-      // Set window width/height to state
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-    
-    // Add event listener
-    window.addEventListener("resize", handleResize);
-     
-    // Call handler right away so state gets updated with initial window size
-    handleResize();
-    
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount
-
-  return windowSize;
 }
