@@ -13,7 +13,7 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass'
 import Controls from './controls';
 import { addStar, searchStar } from './starApi';
 import SkyBox from './skybox'
-
+import { AddMessageModal } from './modals';
 
 extend({ UnrealBloomPass, OutputPass })
 
@@ -47,6 +47,7 @@ export default function Home() {
       position: randomPos()
     }
   ])
+  const [messageModalOpen, setMessageModalOpen] = useState(false)
 
   const StarComponents = ({ stars }) => (
     <>
@@ -67,11 +68,14 @@ export default function Home() {
     </>
   )
 
+  
+
   return (
     <main className={styles.main}>
       <NextUIProvider className={styles.position}>
-        <Menu searchCallback={searchStar(stars, setZoom, setFocusPos, setCurrentFocus)}/>
+        <Menu searchCallback={searchStar(stars, setZoom, setFocusPos, setCurrentFocus)} messageCallback={() => setMessageModalOpen(true)} inZoom={zoom}/>
       </NextUIProvider>
+      <AddMessageModal visible={messageModalOpen} openModal={() => setMessageModalOpen(true)} closeModal={() => setMessageModalOpen(false)} />
       <Canvas camera={{fov: 50}}>
         <ambientLight />
 

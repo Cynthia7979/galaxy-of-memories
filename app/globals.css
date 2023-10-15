@@ -105,3 +105,12 @@ a {
     color-scheme: dark;
   }
 }
+
+button {
+  cursor: pointer;
+  background: none;
+  border: solid white 1px;
+  padding: 6px;
+  color: white;
+  border-radius: 3px;
+}

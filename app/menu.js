@@ -6,7 +6,7 @@ import { symbol } from "prop-types";
 import { useState } from "react";
 import { useRef } from "react";
 
-export default function Menu({ searchCallback, messageCallback }) {
+export default function Menu({ inZoom, searchCallback, messageCallback }) {
   const [query, setQuery] = useState("");
   const inputRef = useRef()
   const handleKeyUp = ev => {
@@ -48,11 +48,15 @@ export default function Menu({ searchCallback, messageCallback }) {
                 Add a new Star
               </Button>
             </DropdownItem>
-            <DropdownItem>
-              <Button className={styles.text2} onClick={messageCallback}>
-                Impart a message
-              </Button>
-            </DropdownItem>
+            {
+              inZoom ? (
+              <DropdownItem>
+                <Button className={styles.text2} onClick={messageCallback}>
+                  Impart a message
+                </Button>
+              </DropdownItem>
+              ) : null
+            }
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
