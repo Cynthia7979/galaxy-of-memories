@@ -16,13 +16,14 @@ export function addStar(stars, setStars) {
     }
 }
 
-export function searchStar(stars, setZoom, setFocusPos, setCurrentFocus) {
+export function searchStar(stars, setZoom, setFocusPos, setCurrentFocus, showMessage) {
     return (nameQuery) => {
         console.log(stars.filter(obj => obj.name == nameQuery))
         let chosenStar = stars.filter(obj => obj.name == nameQuery)[0]
         setCurrentFocus(chosenStar ? chosenStar.name : null);
         chosenStar ? setFocusPos({x: chosenStar.position[0], y: chosenStar.position[1], z: chosenStar.position[2]}) : 0
         setZoom(chosenStar ? true : false)
+        if (!chosenStar) showMessage("Star Not Found", 1000)
     }
 }
 

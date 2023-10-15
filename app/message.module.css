@@ -1,0 +1,18 @@
+.message {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 8px;
+    background-color: #ff5555;
+    padding: 10px;
+    z-index: 100;
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}

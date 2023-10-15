@@ -14,6 +14,7 @@ import Controls from './controls';
 import { addStar, searchStar, addPlanet } from './starApi';
 import SkyBox from './skybox'
 import { AddMessageModal, AddStarModal } from './modals';
+import Message from './message';
 
 extend({ UnrealBloomPass, OutputPass })
 
@@ -61,6 +62,8 @@ export default function Home() {
   ])
   const [messageModalOpen, setMessageModalOpen] = useState(false)
   const [starModalOpen, setStarModalOpen] = useState(false)
+  const [messageVisible, setMessageVisible] = useState(false)
+  const [message, setMessage] = useState('')
 
   const StarComponents = ({ stars }) => (
     <>
@@ -83,15 +86,29 @@ export default function Home() {
     </>
   )
 
+  const showMessage = (message, lifeTime) => {
+    setMessage(message)
+    setMessageVisible(true)
+    setTimeout(() => {
+      setMessageVisible(false)
+    }, lifeTime)
+  }
+
   return (
     <main className={styles.main}>
       <NextUIProvider className={styles.position}>
         <Menu
-          searchCallback={searchStar(stars, setZoom, setFocusPos, setCurrentFocus)}
+          searchCallback={searchStar(stars, setZoom, setFocusPos, setCurrentFocus, showMessage)}
           messageCallback={() => setMessageModalOpen(true)}
           addStarCallback={() => setStarModalOpen(true)}
           inZoom={zoom}/>
       </NextUIProvider>
+
+      <Message
+        message={message}
+        visible={messageVisible}
+      />
+      
       <AddMessageModal
         visible={messageModalOpen}
         closeModal={() => setMessageModalOpen(false)}
